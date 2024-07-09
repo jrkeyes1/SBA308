@@ -76,9 +76,9 @@ const LearnerSubmissions = [
   }
 ];
 
-function getLearnerData(course, ag, submissions) {
+function getLearnerData(course, group, submissions) {
   // Check if the assignment group belongs to the correct course
-  if (ag.course_id !== course.id) {
+  if (group.course_id !== course.id) {
     throw new Error("AssignmentGroup course_id does not match CourseInfo id");
   }
 
@@ -91,7 +91,7 @@ function getLearnerData(course, ag, submissions) {
   // Iterate through each submission
   submissions.forEach(submission => {
     // Find the corresponding assignment for each submission
-    const assignment = ag.assignments.find(a => a.id === submission.assignment_id);
+    const assignment = group.assignments.find(a => a.id === submission.assignment_id);
     if (!assignment) {
       throw new Error("Assignment not found");
     }
