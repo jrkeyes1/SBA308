@@ -95,15 +95,18 @@ function getLearnerData(course, group, submissions) {
     if (!assignment) {
       throw new Error("Assignment not found");
     }
+ 
 
     // Convert due date and submission date to Date objects for comparison
     const dueDate = new Date(assignment.due_at);
     const submittedDate = new Date(submission.submission.submitted_at);
 
     // Skip assignments not yet due
-    if (dueDate > currentDate) {
-      return;
+    switch (true) {
+      case (dueDate > currentDate):
+        return;
     }
+    
 
     // Initialize data structure for each learner if not already done
     if (!learnersData[submission.learner_id]) {
@@ -123,6 +126,8 @@ function getLearnerData(course, group, submissions) {
     if (submittedDate > dueDate) {
       score -= assignment.points_possible * 0.1;
     }
+    
+
 
     // Calculate the percentage score for the assignment and store it
     learnerData[assignment.id] = (score / assignment.points_possible).toFixed(2);
